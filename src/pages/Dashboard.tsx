@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Bus, Route, Calendar, Users, Gauge, Battery, Laptop, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -38,28 +37,28 @@ const Dashboard = () => {
       title: "Vehicle EV1045 entered maintenance",
       description: "Scheduled maintenance for battery replacement",
       time: "2 hours ago",
-      type: "maintenance"
+      type: "maintenance" as "maintenance"
     },
     {
       id: "2",
       title: "Route 57 completed",
       description: "Bus EV0721 completed route with 100% efficiency",
       time: "3 hours ago",
-      type: "route"
+      type: "route" as "route"
     },
     {
       id: "3",
       title: "Device update completed",
       description: "Firmware updated on 15 vehicles",
       time: "5 hours ago",
-      type: "system"
+      type: "system" as "system"
     },
     {
       id: "4",
       title: "New vehicle assigned to Depot 7",
       description: "EV0892 transferred from central facility",
       time: "Yesterday",
-      type: "depot"
+      type: "depot" as "depot"
     },
   ];
 
