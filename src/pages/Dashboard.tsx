@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Bus, Route, Calendar, Users, Gauge, Battery, Laptop, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -7,6 +8,7 @@ import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import StatCard from "@/components/dashboard/StatCard";
 import ActivityTimeline from "@/components/dashboard/ActivityTimeline";
 import FleetStatusChart from "@/components/dashboard/FleetStatusChart";
+import IndiaMap from "@/components/dashboard/IndiaMap";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -163,6 +165,11 @@ const Dashboard = () => {
             <div className="lg:col-span-2">
               <ActivityTimeline items={recentActivities} />
             </div>
+          </div>
+
+          {/* India Map Section */}
+          <div className="mt-6">
+            <IndiaMap />
           </div>
         </main>
       </div>
