@@ -19,7 +19,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Navbar } from "@/components/dashboard/Navbar";
+import Navbar from "@/components/dashboard/Navbar";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { getAllVehicles } from "@/services/vehicleService";
 

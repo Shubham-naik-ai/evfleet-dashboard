@@ -50,7 +50,7 @@ export const getVehicleById = async (id: number) => {
 export const createVehicle = async (vehicle: VehicleFormInput) => {
   const { data, error } = await supabase
     .from('vehicles')
-    .insert([vehicle])
+    .insert([vehicle as any])
     .select();
 
   if (error) {
@@ -64,7 +64,7 @@ export const createVehicle = async (vehicle: VehicleFormInput) => {
 export const updateVehicle = async (id: number, vehicle: Partial<VehicleFormInput>) => {
   const { data, error } = await supabase
     .from('vehicles')
-    .update(vehicle)
+    .update(vehicle as any)
     .eq('id', id)
     .select();
 
@@ -108,7 +108,7 @@ export const getVehicleHistory = async (vehicleId: number) => {
 export const addVehicleHistoryEntry = async (historyEntry: Omit<VehicleHistory, 'id' | 'timestamp'>) => {
   const { data, error } = await supabase
     .from('vehicle_history')
-    .insert([historyEntry])
+    .insert([historyEntry as any])
     .select();
 
   if (error) {

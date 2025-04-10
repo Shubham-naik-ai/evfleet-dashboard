@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Navbar } from "@/components/dashboard/Navbar";
+import Navbar from "@/components/dashboard/Navbar";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { getLiveVehicles } from "@/services/vehicleService";
 import { Vehicle } from "@/types/vehicle";

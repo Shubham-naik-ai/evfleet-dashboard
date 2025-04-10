@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { 
@@ -40,7 +39,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { toast } from "@/hooks/use-toast";
-import { Navbar } from "@/components/dashboard/Navbar";
+import Navbar from "@/components/dashboard/Navbar";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { Vehicle, VehicleFormInput } from "@/types/vehicle";
 import VehicleForm from "@/components/vehicles/VehicleForm";
@@ -65,13 +64,11 @@ export default function AllVehicles() {
   
   const queryClient = useQueryClient();
   
-  // Query to fetch all vehicles
   const { data: vehicles = [], isLoading } = useQuery({
     queryKey: ['vehicles'],
     queryFn: getAllVehicles
   });
   
-  // Mutation to create a new vehicle
   const createVehicleMutation = useMutation({
     mutationFn: createVehicle,
     onSuccess: () => {
@@ -80,7 +77,6 @@ export default function AllVehicles() {
     }
   });
   
-  // Mutation to update a vehicle
   const updateVehicleMutation = useMutation({
     mutationFn: (data: { id: number; vehicle: Partial<VehicleFormInput> }) => 
       updateVehicle(data.id, data.vehicle),
@@ -90,7 +86,6 @@ export default function AllVehicles() {
     }
   });
   
-  // Mutation to delete a vehicle
   const deleteVehicleMutation = useMutation({
     mutationFn: deleteVehicle,
     onSuccess: () => {
@@ -100,7 +95,6 @@ export default function AllVehicles() {
     }
   });
   
-  // Filtered vehicles based on search query
   const filteredVehicles = vehicles.filter(vehicle => {
     const query = searchQuery.toLowerCase();
     return (
@@ -116,13 +110,11 @@ export default function AllVehicles() {
     );
   });
   
-  // Handle bulk upload
   const handleBulkUpload = async (vehicles: VehicleFormInput[]) => {
     try {
       let successCount = 0;
       let failureCount = 0;
       
-      // Process each vehicle
       for (const vehicle of vehicles) {
         try {
           await createVehicle(vehicle);
@@ -133,7 +125,6 @@ export default function AllVehicles() {
         }
       }
       
-      // Refresh the vehicles list
       queryClient.invalidateQueries({ queryKey: ['vehicles'] });
       setIsUploadDialogOpen(false);
       
@@ -143,15 +134,12 @@ export default function AllVehicles() {
     }
   };
   
-  // Handle CSV download
   const handleDownload = async () => {
     try {
       const csvContent = await downloadVehiclesCSV();
       
-      // Create a Blob from the CSV content
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       
-      // Create a download link and trigger the download
       const link = document.createElement('a');
       const url = URL.createObjectURL(blob);
       link.setAttribute('href', url);
@@ -321,7 +309,6 @@ export default function AllVehicles() {
         </main>
       </div>
       
-      {/* Add Vehicle Dialog */}
       <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
         <DialogContent className="max-w-3xl">
           <DialogHeader>
@@ -331,14 +318,15 @@ export default function AllVehicles() {
             </DialogDescription>
           </DialogHeader>
           <VehicleForm
-            onSubmit={createVehicleMutation.mutateAsync}
+            onSubmit={async (data) => {
+              await createVehicleMutation.mutateAsync(data);
+            }}
             onCancel={() => setIsAddDialogOpen(false)}
             isLoading={createVehicleMutation.isPending}
           />
         </DialogContent>
       </Dialog>
       
-      {/* Edit Vehicle Dialog */}
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
         <DialogContent className="max-w-3xl">
           <DialogHeader>
@@ -363,7 +351,6 @@ export default function AllVehicles() {
         </DialogContent>
       </Dialog>
       
-      {/* View Vehicle Dialog */}
       <Dialog open={isViewDialogOpen} onOpenChange={setIsViewDialogOpen}>
         <DialogContent className="max-w-3xl">
           <DialogHeader>
@@ -474,7 +461,6 @@ export default function AllVehicles() {
         </DialogContent>
       </Dialog>
       
-      {/* Upload Vehicles Dialog */}
       <Dialog open={isUploadDialogOpen} onOpenChange={setIsUploadDialogOpen}>
         <DialogContent>
           <DialogHeader>
@@ -500,7 +486,6 @@ export default function AllVehicles() {
         </DialogContent>
       </Dialog>
       
-      {/* Delete Confirmation Dialog */}
       <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
