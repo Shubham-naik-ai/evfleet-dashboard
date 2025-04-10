@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 import { 
   Bus, 
@@ -12,7 +11,8 @@ import {
   Battery, 
   Laptop, 
   Settings,
-  LogOut
+  LogOut,
+  Activity
 } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -43,10 +43,26 @@ export function Sidebar({ className }: SidebarProps) {
             <HomeIcon className="h-4 w-4" />
             Depots
           </Link>
+          
+          <div className="px-2 py-2">
+            <h4 className="text-xs font-semibold text-muted-foreground mb-1">VEHICLE MANAGEMENT</h4>
+          </div>
           <Link to="/vehicles" className={cn("nav-item", pathname === "/vehicles" && "active")}>
             <Bus className="h-4 w-4" />
-            Vehicles
+            All Vehicles
           </Link>
+          <Link to="/vehicles/live" className={cn("nav-item", pathname === "/vehicles/live" && "active")}>
+            <Activity className="h-4 w-4" />
+            Live Vehicles
+          </Link>
+          <Link to="/vehicles/history" className={cn("nav-item", pathname === "/vehicles/history" && "active")}>
+            <Gauge className="h-4 w-4" />
+            Vehicle History
+          </Link>
+          
+          <div className="px-2 py-2">
+            <h4 className="text-xs font-semibold text-muted-foreground mb-1">OPERATIONS</h4>
+          </div>
           <Link to="/routes" className={cn("nav-item", pathname === "/routes" && "active")}>
             <Route className="h-4 w-4" />
             Routes
