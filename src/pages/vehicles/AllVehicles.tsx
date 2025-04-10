@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { 
@@ -44,6 +45,7 @@ import { Sidebar } from "@/components/dashboard/Sidebar";
 import { Vehicle, VehicleFormInput } from "@/types/vehicle";
 import VehicleForm from "@/components/vehicles/VehicleForm";
 import CSVUploader from "@/components/vehicles/CSVUploader";
+import VehicleStatistics from "@/components/vehicles/VehicleStatistics";
 import {
   getAllVehicles,
   createVehicle,
@@ -61,6 +63,7 @@ export default function AllVehicles() {
   const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
+  const [showStats, setShowStats] = useState(true);
   
   const queryClient = useQueryClient();
   
@@ -177,6 +180,23 @@ export default function AllVehicles() {
             <h1 className="text-2xl font-bold mb-2">Vehicle Management</h1>
             <p className="text-muted-foreground">View and manage all vehicles in the fleet</p>
           </div>
+          
+          {!isLoading && vehicles.length > 0 && (
+            <>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-semibold">Vehicle Statistics</h2>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => setShowStats(!showStats)}
+                >
+                  {showStats ? 'Hide Statistics' : 'Show Statistics'}
+                </Button>
+              </div>
+              
+              {showStats && <VehicleStatistics vehicles={vehicles} />}
+            </>
+          )}
           
           <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
             <div className="relative w-full md:w-auto flex-1 md:max-w-sm">

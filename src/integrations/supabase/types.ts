@@ -9,7 +9,104 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      vehicle_history: {
+        Row: {
+          details: Json | null
+          id: number
+          location_lat: number | null
+          location_lng: number | null
+          odo_reading: number | null
+          soc: number | null
+          status: string
+          timestamp: string
+          vehicle_id: number
+        }
+        Insert: {
+          details?: Json | null
+          id?: number
+          location_lat?: number | null
+          location_lng?: number | null
+          odo_reading?: number | null
+          soc?: number | null
+          status: string
+          timestamp?: string
+          vehicle_id: number
+        }
+        Update: {
+          details?: Json | null
+          id?: number
+          location_lat?: number | null
+          location_lng?: number | null
+          odo_reading?: number | null
+          soc?: number | null
+          status?: string
+          timestamp?: string
+          vehicle_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "vehicle_history_vehicle_id_fkey"
+            columns: ["vehicle_id"]
+            isOneToOne: false
+            referencedRelation: "vehicles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      vehicles: {
+        Row: {
+          chassis_no: string
+          created_at: string
+          depot: string
+          device_make: string | null
+          engine_no: string
+          id: number
+          imei_no: string
+          last_heartbeat: string | null
+          odo_reading: number | null
+          registration_no: string
+          remarks: string | null
+          soc: number | null
+          status: string
+          updated_at: string
+          vehicle_id: string
+        }
+        Insert: {
+          chassis_no: string
+          created_at?: string
+          depot: string
+          device_make?: string | null
+          engine_no: string
+          id?: number
+          imei_no: string
+          last_heartbeat?: string | null
+          odo_reading?: number | null
+          registration_no: string
+          remarks?: string | null
+          soc?: number | null
+          status: string
+          updated_at?: string
+          vehicle_id: string
+        }
+        Update: {
+          chassis_no?: string
+          created_at?: string
+          depot?: string
+          device_make?: string | null
+          engine_no?: string
+          id?: number
+          imei_no?: string
+          last_heartbeat?: string | null
+          odo_reading?: number | null
+          registration_no?: string
+          remarks?: string | null
+          soc?: number | null
+          status?: string
+          updated_at?: string
+          vehicle_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
