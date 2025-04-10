@@ -1,7 +1,7 @@
 
 import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Card } from "@/components/ui/card";
 
 interface KilometerCardProps {
   title: string;
@@ -9,17 +9,15 @@ interface KilometerCardProps {
   className?: string;
 }
 
-export const KilometerCard = ({
-  title,
-  value,
-  className,
-}: KilometerCardProps) => {
+export const KilometerCard: React.FC<KilometerCardProps> = ({ title, value, className }) => {
   return (
-    <Card className={cn("transition-all duration-300 hover:shadow-md", className)}>
-      <div className="px-4 py-3">
-        <h3 className="text-xs font-medium text-muted-foreground mb-1">{title}</h3>
-        <p className="text-2xl font-bold tracking-tight">{value}</p>
-      </div>
+    <Card className={cn("overflow-hidden", className)}>
+      <CardContent className="p-4">
+        <h3 className="text-sm font-medium text-muted-foreground">{title}</h3>
+        <p className={cn("text-2xl font-semibold mt-1")}>
+          {typeof value === 'number' ? value.toLocaleString() : value}
+        </p>
+      </CardContent>
     </Card>
   );
 };

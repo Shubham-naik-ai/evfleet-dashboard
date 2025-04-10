@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import DORAnalysis from "./pages/DORAnalysis";
+import LossKmsAnalysis from "./pages/LossKmsAnalysis";
 import AllVehicles from "./pages/vehicles/AllVehicles";
 import LiveVehicles from "./pages/vehicles/LiveVehicles";
 import VehicleHistory from "./pages/vehicles/VehicleHistory";
@@ -22,6 +23,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/analysis" element={<DORAnalysis />} />
+          <Route path="/loss-kms-analysis" element={<LossKmsAnalysis />} />
           <Route path="/vehicles" element={<AllVehicles />} />
           <Route path="/vehicles/live" element={<LiveVehicles />} />
           <Route path="/vehicles/history" element={<VehicleHistory />} />

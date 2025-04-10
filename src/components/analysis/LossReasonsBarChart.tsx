@@ -52,11 +52,11 @@ const chartConfig = {
 
 export const LossReasonsBarChart = () => {
   return (
-    <ChartContainer config={chartConfig} className="h-[335px] w-full">
+    <ChartContainer config={chartConfig} className="h-[300px] w-full">
       <BarChart
         data={data}
         layout="vertical"
-        margin={{ top: 5, right: 65, left: 130, bottom: 5 }}
+        margin={{ top: 5, right: 65, left: 120, bottom: 5 }}
       >
         <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
         <XAxis 
@@ -71,7 +71,7 @@ export const LossReasonsBarChart = () => {
           tick={{ fontSize: 10 }}
           tickLine={false}
           axisLine={{ stroke: "#e5e7eb" }}
-          width={130}
+          width={120}
         />
         <Tooltip content={<ChartTooltipContent />} />
         <Bar dataKey="value" fill="#0EA5E9" radius={[0, 4, 4, 0]}>

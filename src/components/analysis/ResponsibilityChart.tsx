@@ -15,10 +15,10 @@ import { ChartContainer, ChartTooltipContent } from "@/components/ui/chart";
 
 // Sample data for responsibilities
 const data = [
-  { name: "Operations", value: 58427.1 },
-  { name: "Service", value: 35384.45 },
-  { name: "Authority", value: 15707.9 },
-  { name: "Operator", value: 10207.4 },
+  { name: "Operations", value: 58427 },
+  { name: "Service", value: 35384 },
+  { name: "Authority", value: 15708 },
+  { name: "Operator", value: 10207 },
 ];
 
 // Colors for the bars
@@ -34,7 +34,7 @@ const chartConfig = {
 
 export const ResponsibilityChart = () => {
   return (
-    <ChartContainer config={chartConfig} className="h-[335px] w-full">
+    <ChartContainer config={chartConfig} className="h-[300px] w-full">
       <BarChart
         data={data}
         margin={{ top: 5, right: 30, left: 30, bottom: 20 }}
@@ -56,7 +56,7 @@ export const ResponsibilityChart = () => {
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
           ))}
-          <LabelList dataKey="value" position="top" fill="#64748B" fontSize={10} formatter={(value: number) => value.toFixed(1)} />
+          <LabelList dataKey="value" position="top" fill="#64748B" fontSize={10} formatter={(value) => value.toLocaleString()} />
         </Bar>
       </BarChart>
     </ChartContainer>

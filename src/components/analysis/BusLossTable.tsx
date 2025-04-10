@@ -1,22 +1,19 @@
 
 import React from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
-// Sample data for the bus loss table
+// Sample data for bus-wise loss kilometers
 const busData = [
-  { id: 1, busNo: "MH12NE9391", lossKM: 3127.4 },
-  { id: 2, busNo: "MH12NE8576", lossKM: 2949 },
-  { id: 3, busNo: "MH12YV8572", lossKM: 1716.55 },
-  { id: 4, busNo: "MH12TV1218", lossKM: 1600.9 },
-  { id: 5, busNo: "MH12NN5389", lossKM: 1516.5 },
-  { id: 6, busNo: "MH12SE4956", lossKM: 1433.1 },
-  { id: 7, busNo: "MH12NS5379", lossKM: 1313.7 },
-  { id: 8, busNo: "MH12TV5096", lossKM: 1138.4 },
-  { id: 9, busNo: "MH12TV5406", lossKM: 1121.3 },
-  { id: 10, busNo: "MH12NK8721", lossKM: 1115.5 },
-  { id: 11, busNo: "MH12NW7158", lossKM: 1075.4 },
-  { id: 12, busNo: "MH12NS5383", lossKM: 1037.6 },
-  { id: 13, busNo: "MH12TV1480", lossKM: 1007.6 },
+  { regNo: "MH12NE9391", type: "AC", scheduled: 4850, operated: 2350, loss: 2500, lossPercent: 51.5 },
+  { regNo: "MH12AB1234", type: "Mini", scheduled: 3240, operated: 1640, loss: 1600, lossPercent: 49.4 },
+  { regNo: "MH12CD5678", type: "Non-AC", scheduled: 3980, operated: 2580, loss: 1400, lossPercent: 35.2 },
+  { regNo: "MH12EF9012", type: "AC", scheduled: 4120, operated: 2850, loss: 1270, lossPercent: 30.8 },
+  { regNo: "MH12GH3456", type: "Non-AC", scheduled: 3750, operated: 2520, loss: 1230, lossPercent: 32.8 },
+  { regNo: "MH12IJ7890", type: "Mini", scheduled: 2850, operated: 1680, loss: 1170, lossPercent: 41.1 },
+  { regNo: "MH12KL1234", type: "AC", scheduled: 4560, operated: 3410, loss: 1150, lossPercent: 25.2 },
+  { regNo: "MH12MN5678", type: "Non-AC", scheduled: 3680, operated: 2540, loss: 1140, lossPercent: 31.0 },
+  { regNo: "MH12OP9012", type: "AC", scheduled: 4240, operated: 3120, loss: 1120, lossPercent: 26.4 },
+  { regNo: "MH12QR3456", type: "Mini", scheduled: 2980, operated: 1870, loss: 1110, lossPercent: 37.2 },
 ];
 
 export const BusLossTable = () => {
@@ -25,33 +22,39 @@ export const BusLossTable = () => {
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-border/40">
-            <th className="px-4 py-3 text-left font-medium w-10">#</th>
-            <th className="px-4 py-3 text-left font-medium">Bus Reg. No.</th>
-            <th className="px-4 py-3 text-right font-medium">Loss KM</th>
+            <th className="px-4 py-3 text-left font-medium">Reg. No.</th>
+            <th className="px-4 py-3 text-left font-medium">Type</th>
+            <th className="px-4 py-3 text-right font-medium">
+              <div className="flex items-center justify-end gap-1">
+                Loss KM
+                <div className="flex flex-col">
+                  <ChevronUp size={12} className="text-muted-foreground" />
+                  <ChevronDown size={12} className="-mt-1 text-muted-foreground" />
+                </div>
+              </div>
+            </th>
+            <th className="px-4 py-3 text-right font-medium">Loss %</th>
           </tr>
         </thead>
         <tbody>
-          {busData.map((item) => (
-            <tr key={item.id} className="border-b border-border/40">
-              <td className="px-4 py-2.5 text-muted-foreground">{item.id}</td>
-              <td className="px-4 py-2.5">{item.busNo}</td>
-              <td className="px-4 py-2.5 text-right">{item.lossKM.toFixed(1)}</td>
+          {busData.map((bus, index) => (
+            <tr key={index} className="border-b border-border/40 hover:bg-muted/20">
+              <td className="px-4 py-2.5 font-medium">{bus.regNo}</td>
+              <td className="px-4 py-2.5">
+                <span className={`px-2 py-0.5 rounded-full text-xs ${
+                  bus.type === 'AC' ? 'bg-blue-100 text-blue-800' :
+                  bus.type === 'Non-AC' ? 'bg-green-100 text-green-800' :
+                  'bg-yellow-100 text-yellow-800'
+                }`}>
+                  {bus.type}
+                </span>
+              </td>
+              <td className="px-4 py-2.5 text-right text-red-500">{bus.loss.toLocaleString()}</td>
+              <td className="px-4 py-2.5 text-right text-red-500">{bus.lossPercent.toFixed(1)}%</td>
             </tr>
           ))}
         </tbody>
       </table>
-      
-      <div className="flex items-center justify-between px-4 py-2 text-sm text-muted-foreground">
-        <span>1 - 13 / 313</span>
-        <div className="flex items-center gap-1">
-          <button className="w-6 h-6 rounded flex items-center justify-center hover:bg-muted transition-colors">
-            <ChevronLeft size={16} />
-          </button>
-          <button className="w-6 h-6 rounded flex items-center justify-center hover:bg-muted transition-colors">
-            <ChevronRight size={16} />
-          </button>
-        </div>
-      </div>
     </div>
   );
 };
