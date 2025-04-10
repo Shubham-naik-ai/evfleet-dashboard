@@ -2,13 +2,15 @@
 import { supabase } from "@/integrations/supabase/client";
 import { Vehicle, VehicleFormInput, VehicleHistory } from "@/types/vehicle";
 
+// Use a typed wrapper for Supabase client to avoid TypeScript errors
+const typedSupabase = supabase as any;
+
 // Get all vehicles
 export const getAllVehicles = async () => {
-  // Using type assertion to bypass TypeScript errors with Supabase tables
-  const { data, error } = await (supabase
+  const { data, error } = await typedSupabase
     .from('vehicles')
     .select('*')
-    .order('vehicle_id', { ascending: true }) as any);
+    .order('vehicle_id', { ascending: true });
 
   if (error) {
     throw new Error(error.message);
@@ -19,11 +21,11 @@ export const getAllVehicles = async () => {
 
 // Get active vehicles (for live vehicles page)
 export const getLiveVehicles = async () => {
-  const { data, error } = await (supabase
+  const { data, error } = await typedSupabase
     .from('vehicles')
     .select('*')
     .eq('status', 'ACTIVE')
-    .order('updated_at', { ascending: false }) as any);
+    .order('updated_at', { ascending: false });
 
   if (error) {
     throw new Error(error.message);
@@ -34,11 +36,11 @@ export const getLiveVehicles = async () => {
 
 // Get vehicle by id
 export const getVehicleById = async (id: number) => {
-  const { data, error } = await (supabase
+  const { data, error } = await typedSupabase
     .from('vehicles')
     .select('*')
     .eq('id', id)
-    .single() as any);
+    .single();
 
   if (error) {
     throw new Error(error.message);
@@ -49,10 +51,10 @@ export const getVehicleById = async (id: number) => {
 
 // Create a new vehicle
 export const createVehicle = async (vehicle: VehicleFormInput) => {
-  const { data, error } = await (supabase
+  const { data, error } = await typedSupabase
     .from('vehicles')
-    .insert([vehicle as any])
-    .select() as any);
+    .insert([vehicle])
+    .select();
 
   if (error) {
     throw new Error(error.message);
@@ -63,11 +65,11 @@ export const createVehicle = async (vehicle: VehicleFormInput) => {
 
 // Update a vehicle
 export const updateVehicle = async (id: number, vehicle: Partial<VehicleFormInput>) => {
-  const { data, error } = await (supabase
+  const { data, error } = await typedSupabase
     .from('vehicles')
-    .update(vehicle as any)
+    .update(vehicle)
     .eq('id', id)
-    .select() as any);
+    .select();
 
   if (error) {
     throw new Error(error.message);
@@ -78,10 +80,10 @@ export const updateVehicle = async (id: number, vehicle: Partial<VehicleFormInpu
 
 // Delete a vehicle
 export const deleteVehicle = async (id: number) => {
-  const { error } = await (supabase
+  const { error } = await typedSupabase
     .from('vehicles')
     .delete()
-    .eq('id', id) as any);
+    .eq('id', id);
 
   if (error) {
     throw new Error(error.message);
@@ -92,11 +94,11 @@ export const deleteVehicle = async (id: number) => {
 
 // Get vehicle history
 export const getVehicleHistory = async (vehicleId: number) => {
-  const { data, error } = await (supabase
+  const { data, error } = await typedSupabase
     .from('vehicle_history')
     .select('*')
     .eq('vehicle_id', vehicleId)
-    .order('timestamp', { ascending: false }) as any);
+    .order('timestamp', { ascending: false });
 
   if (error) {
     throw new Error(error.message);
@@ -107,10 +109,10 @@ export const getVehicleHistory = async (vehicleId: number) => {
 
 // Add vehicle history entry
 export const addVehicleHistoryEntry = async (historyEntry: Omit<VehicleHistory, 'id' | 'timestamp'>) => {
-  const { data, error } = await (supabase
+  const { data, error } = await typedSupabase
     .from('vehicle_history')
-    .insert([historyEntry as any])
-    .select() as any);
+    .insert([historyEntry])
+    .select();
 
   if (error) {
     throw new Error(error.message);
