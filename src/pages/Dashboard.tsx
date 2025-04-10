@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from "react";
-import { Bus, Route, Calendar, Users, Gauge, Battery, Laptop, MapPin } from "lucide-react";
+import { Bus, Route, Calendar, Users, Gauge, Battery, Laptop, MapPin, TrendingDown, AlertTriangle, Truck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/dashboard/Navbar";
 import { Sidebar } from "@/components/dashboard/Sidebar";
@@ -9,13 +8,15 @@ import StatCard from "@/components/dashboard/StatCard";
 import ActivityTimeline from "@/components/dashboard/ActivityTimeline";
 import FleetStatusChart from "@/components/dashboard/FleetStatusChart";
 import IndiaMap from "@/components/dashboard/IndiaMap";
+import { KilometerCard } from "@/components/analysis/KilometerCard";
+import { MonthlyLossChart } from "@/components/analysis/MonthlyLossChart";
+import { ResponsibilityChart } from "@/components/analysis/ResponsibilityChart";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 800);
@@ -167,7 +168,64 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* India Map Section */}
+          <div className="mt-6">
+            <h2 className="text-lg font-semibold mb-3">Key Performance Metrics</h2>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <KilometerCard 
+                title="Monthly Distance Covered" 
+                value="1,456,789 km" 
+                change="↑ 12.5% from last month" 
+                trend="up"
+                icon="truck"
+              />
+              <KilometerCard 
+                title="Average Daily Distance" 
+                value="48,560 km" 
+                change="↑ 5.2% from last week" 
+                trend="up"
+                icon="route"
+              />
+              <KilometerCard 
+                title="Monthly Loss KMs" 
+                value="119,726 km" 
+                change="↓ 3.8% from last month" 
+                trend="up"
+                icon="trending"
+              />
+              <KilometerCard 
+                title="Incidents This Month" 
+                value="47" 
+                change="↑ 2 more than last month" 
+                trend="down"
+                icon="alert"
+              />
+              <KilometerCard 
+                title="Avg KMs Per Charge" 
+                value="287 km" 
+                change="↑ 2.3% improvement" 
+                trend="up"
+                icon="gauge"
+              />
+              <KilometerCard 
+                title="Upcoming Maintenance" 
+                value="18 vehicles" 
+                change="Due within 7 days" 
+                icon="calendar"
+              />
+            </div>
+          </div>
+
+          <div className="mt-6 grid md:grid-cols-2 gap-6">
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border dark:border-gray-700 shadow-sm">
+              <h3 className="text-base font-medium mb-4">Monthly Loss KM Trend</h3>
+              <MonthlyLossChart />
+            </div>
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border dark:border-gray-700 shadow-sm">
+              <h3 className="text-base font-medium mb-4">Loss KM by Responsibility</h3>
+              <ResponsibilityChart />
+            </div>
+          </div>
+
           <div className="mt-6">
             <IndiaMap />
           </div>
