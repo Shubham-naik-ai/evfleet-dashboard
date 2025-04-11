@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Bus, Calendar, Gauge, Shield, Clock, File, Navigation } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -10,7 +11,6 @@ import IdleVehiclesChart from "@/components/dashboard/IdleVehiclesChart";
 import IndiaMap from "@/components/dashboard/IndiaMap";
 import { KilometerCard } from "@/components/analysis/KilometerCard";
 import { VehicleExpiryWidget } from "@/components/dashboard/VehicleExpiryWidget";
-import { FleetSafetyChart } from "@/components/dashboard/FleetSafetyChart";
 import { DailyDistanceChart } from "@/components/dashboard/DailyDistanceChart";
 import TotalVehiclesCard from "@/components/dashboard/TotalVehiclesCard";
 
@@ -142,7 +142,7 @@ const Dashboard = () => {
 
           <div className="mt-6 grid gap-6 md:grid-cols-2">
             <DailyDistanceChart />
-            <FleetSafetyChart />
+            {/* Fleet Safety Chart removed */}
           </div>
 
           <div className="mt-6 grid gap-6 md:grid-cols-3">

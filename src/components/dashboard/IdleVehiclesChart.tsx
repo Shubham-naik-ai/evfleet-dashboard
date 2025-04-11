@@ -59,10 +59,12 @@ const IdleVehiclesChart = ({ data }: IdleVehiclesChartProps) => {
               />
             </PieChart>
           </ResponsiveContainer>
-          {/* Total count in the center of donut */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-            <span className="text-2xl font-bold">{total}</span>
-            <p className="text-xs text-muted-foreground">Total Idle</p>
+          {/* Improved center positioning with flex layout */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="text-center">
+              <span className="text-2xl font-bold block">{total}</span>
+              <p className="text-xs text-muted-foreground">Total Idle</p>
+            </div>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-3 mt-4">
