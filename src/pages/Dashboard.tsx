@@ -49,6 +49,16 @@ const Dashboard = () => {
     stopped: 147,
   };
 
+  const weeklyPerformanceData = [
+    { day: "Mon", efficiency: 92 },
+    { day: "Tue", efficiency: 87 },
+    { day: "Wed", efficiency: 95 },
+    { day: "Thu", efficiency: 89 },
+    { day: "Fri", efficiency: 91 },
+    { day: "Sat", efficiency: 84 },
+    { day: "Sun", efficiency: 78 },
+  ];
+
   if (isLoading) {
     return (
       <div className="h-screen w-full flex items-center justify-center">
@@ -142,7 +152,7 @@ const Dashboard = () => {
 
           <div className="mt-6 grid gap-6 md:grid-cols-2">
             <DailyDistanceChart />
-            {/* Fleet Safety Chart removed */}
+            <WeeklyEfficiencyCard data={weeklyPerformanceData} />
           </div>
 
           <div className="mt-6 grid gap-6 md:grid-cols-3">
