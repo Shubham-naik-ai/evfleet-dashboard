@@ -2,13 +2,13 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Truck, Route, AlertTriangle, Calendar, TrendingDown, Gauge } from "lucide-react";
+import { Truck, Route, AlertTriangle, Calendar, TrendingDown, Gauge, Shield, Navigation } from "lucide-react";
 
 interface KilometerCardProps {
   title: string;
   value: string | number;
   change?: string;
-  icon?: "truck" | "route" | "alert" | "calendar" | "trending" | "gauge";
+  icon?: "truck" | "route" | "alert" | "calendar" | "trending" | "gauge" | "shield" | "navigation";
   trend?: "up" | "down" | "neutral";
   className?: string;
 }
@@ -29,6 +29,8 @@ export const KilometerCard: React.FC<KilometerCardProps> = ({
       case "calendar": return <Calendar className="h-5 w-5" />;
       case "trending": return <TrendingDown className="h-5 w-5" />;
       case "gauge": return <Gauge className="h-5 w-5" />;
+      case "shield": return <Shield className="h-5 w-5" />;
+      case "navigation": return <Navigation className="h-5 w-5" />;
       default: return null;
     }
   };
@@ -59,6 +61,9 @@ export const KilometerCard: React.FC<KilometerCardProps> = ({
               icon === "alert" ? "bg-red-100 text-red-600" : 
               icon === "calendar" ? "bg-green-100 text-green-600" :
               icon === "trending" ? "bg-amber-100 text-amber-600" :
+              icon === "gauge" ? "bg-cyan-100 text-cyan-600" :
+              icon === "shield" ? "bg-purple-100 text-purple-600" :
+              icon === "navigation" ? "bg-emerald-100 text-emerald-600" :
               "bg-slate-100 text-slate-600"
             )}>
               {getIcon()}
