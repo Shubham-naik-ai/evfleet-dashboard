@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Bus, Calendar, Gauge, Shield, Clock, File, Navigation } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -13,6 +12,7 @@ import { KilometerCard } from "@/components/analysis/KilometerCard";
 import { VehicleExpiryWidget } from "@/components/dashboard/VehicleExpiryWidget";
 import { DailyDistanceChart } from "@/components/dashboard/DailyDistanceChart";
 import TotalVehiclesCard from "@/components/dashboard/TotalVehiclesCard";
+import WeeklyEfficiencyCard from "@/components/dashboard/WeeklyEfficiencyCard";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
