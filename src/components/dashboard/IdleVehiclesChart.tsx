@@ -1,6 +1,17 @@
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  Legend,
+  Tooltip,
+} from "recharts";
 import { Clock } from "lucide-react";
 
 interface IdleVehiclesChartProps {
@@ -24,6 +35,7 @@ const IdleVehiclesChart = ({ data }: IdleVehiclesChartProps) => {
           </div>
         </div>
       </CardHeader>
+
       <CardContent>
         <div className="h-60 relative">
           <ResponsiveContainer width="100%" height="100%">
@@ -41,36 +53,48 @@ const IdleVehiclesChart = ({ data }: IdleVehiclesChartProps) => {
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
               </Pie>
-              <Tooltip 
-                formatter={(value) => [`${value} vehicles`, '']}
-                contentStyle={{ 
-                  borderRadius: '8px',
-                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-                  border: 'none'
+              <Tooltip
+                formatter={(value) => [`${value} vehicles`, ""]}
+                contentStyle={{
+                  borderRadius: "8px",
+                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                  border: "none",
                 }}
               />
-              <Legend 
+              <Legend
                 layout="vertical"
                 verticalAlign="middle"
                 align="right"
-                formatter={(value, entry, index) => (
+                formatter={(value) => (
                   <span className="text-xs font-medium">{value}</span>
                 )}
               />
             </PieChart>
           </ResponsiveContainer>
-          {/* Perfect center positioning for the total count */}
+
+          {/* Centered Total Count */}
           <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center pointer-events-none">
-            <div className="text-center">
-              <span className="text-2xl font-bold block">{total}</span>
-              <span className="text-xs text-muted-foreground block">Total Idle</span>
+            <div className="text-center leading-tight">
+              <span className="text-2xl font-bold block transition-all duration-500 min-w-[3ch]">
+                {total}
+              </span>
+              <span className="text-xs text-muted-foreground block">
+                Total Idle
+              </span>
             </div>
           </div>
         </div>
+
         <div className="grid grid-cols-2 gap-3 mt-4">
           {data.map((item, i) => (
-            <div key={i} className="flex items-center gap-2 bg-muted/30 p-2 rounded-md">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></div>
+            <div
+              key={i}
+              className="flex items-center gap-2 bg-muted/30 p-2 rounded-md"
+            >
+              <div
+                className="w-3 h-3 rounded-full"
+                style={{ backgroundColor: item.color }}
+              ></div>
               <span className="text-xs">{item.name}</span>
               <span className="text-xs font-medium ml-auto">{item.value}</span>
             </div>
