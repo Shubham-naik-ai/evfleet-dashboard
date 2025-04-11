@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Bus, Calendar, Gauge, Shield, Clock, File, Navigation } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -6,13 +5,14 @@ import Navbar from "@/components/dashboard/Navbar";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import StatCard from "@/components/dashboard/StatCard";
-import ActivityTimeline from "@/components/dashboard/ActivityTimeline";
 import FleetStatusChart from "@/components/dashboard/FleetStatusChart";
+import IdleVehiclesChart from "@/components/dashboard/IdleVehiclesChart";
 import IndiaMap from "@/components/dashboard/IndiaMap";
 import { KilometerCard } from "@/components/analysis/KilometerCard";
 import { VehicleExpiryWidget } from "@/components/dashboard/VehicleExpiryWidget";
 import { FleetSafetyChart } from "@/components/dashboard/FleetSafetyChart";
 import { DailyDistanceChart } from "@/components/dashboard/DailyDistanceChart";
+import TotalVehiclesCard from "@/components/dashboard/TotalVehiclesCard";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -31,41 +31,23 @@ const Dashboard = () => {
   };
 
   const fleetStatusData = [
-    { name: "Running", value: 856, color: "#10B981" },
-    { name: "Active", value: 222, color: "#0EA5E9" },
-    { name: "Stop", value: 147, color: "#F59E0B" },
+    { name: "In Depot", value: 427, color: "#0EA5E9" }, // Blue
+    { name: "On Route", value: 648, color: "#10B981" }, // Green
+    { name: "Maintenance", value: 150, color: "#F59E0B" }, // Amber
   ];
 
-  const recentActivities = [
-    {
-      id: "1",
-      title: "Vehicle EV1045 entered maintenance",
-      description: "Scheduled maintenance for battery replacement",
-      time: "2 hours ago",
-      type: "maintenance" as "maintenance"
-    },
-    {
-      id: "2",
-      title: "Route 57 completed",
-      description: "Bus EV0721 completed route with 100% efficiency",
-      time: "3 hours ago",
-      type: "route" as "route"
-    },
-    {
-      id: "3",
-      title: "Device update completed",
-      description: "Firmware updated on 15 vehicles",
-      time: "5 hours ago",
-      type: "system" as "system"
-    },
-    {
-      id: "4",
-      title: "New vehicle assigned to Depot 7",
-      description: "EV0892 transferred from central facility",
-      time: "Yesterday",
-      type: "depot" as "depot"
-    },
+  const idleVehiclesData = [
+    { name: "0 Hrs", value: 128, color: "#10B981" }, // Green
+    { name: "0-2 Hrs", value: 246, color: "#0EA5E9" }, // Blue
+    { name: "2-5 Hrs", value: 183, color: "#F59E0B" }, // Amber
+    { name: "> 5 Hrs", value: 97, color: "#EF4444" }, // Red
   ];
+
+  const vehicleCounts = {
+    running: 856,
+    active: 222,
+    stopped: 147,
+  };
 
   if (isLoading) {
     return (
@@ -126,13 +108,14 @@ const Dashboard = () => {
           <div className="grid lg:grid-cols-3 gap-6 mt-6">
             <FleetStatusChart data={fleetStatusData} />
             <div className="lg:col-span-2">
-              <ActivityTimeline items={recentActivities} />
+              <IdleVehiclesChart data={idleVehiclesData} />
             </div>
           </div>
 
           <div className="mt-6">
             <h2 className="text-lg font-semibold mb-3">Key Performance Metrics</h2>
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-4">
+              <TotalVehiclesCard counts={vehicleCounts} />
               <KilometerCard 
                 title="Avg Daily Distance" 
                 value="48,560 km" 
