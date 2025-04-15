@@ -1,3 +1,4 @@
+
 import {
   Card,
   CardContent,
@@ -9,7 +10,6 @@ import {
   Pie,
   Cell,
   ResponsiveContainer,
-  Legend,
   Tooltip,
 } from "recharts";
 import { Clock } from "lucide-react";
@@ -61,19 +61,10 @@ const IdleVehiclesChart = ({ data }: IdleVehiclesChartProps) => {
                   border: "none",
                 }}
               />
-              <Legend
-                layout="vertical"
-                verticalAlign="middle"
-                align="right"
-                formatter={(value) => (
-                  <span className="text-xs font-medium">{value}</span>
-                )}
-              />
             </PieChart>
           </ResponsiveContainer>
 
-          {/* Centered Total Count */}
-          <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
             <div className="text-center leading-tight">
               <span className="text-2xl font-bold block transition-all duration-500 min-w-[3ch]">
                 {total}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Bus, Calendar, Gauge, Shield, Clock, File, Navigation } from "lucide-react";
+import { Bus, Calendar, Gauge, Shield, Clock, Navigation } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/dashboard/Navbar";
 import { Sidebar } from "@/components/dashboard/Sidebar";
@@ -7,12 +7,14 @@ import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import StatCard from "@/components/dashboard/StatCard";
 import FleetStatusChart from "@/components/dashboard/FleetStatusChart";
 import IdleVehiclesChart from "@/components/dashboard/IdleVehiclesChart";
+import VehicleStatusChart from "@/components/dashboard/VehicleStatusChart";
+import VtsDeviceStatusChart from "@/components/dashboard/VtsDeviceStatusChart";
 import IndiaMap from "@/components/dashboard/IndiaMap";
 import { KilometerCard } from "@/components/analysis/KilometerCard";
 import { VehicleExpiryWidget } from "@/components/dashboard/VehicleExpiryWidget";
 import { DailyDistanceChart } from "@/components/dashboard/DailyDistanceChart";
 import TotalVehiclesCard from "@/components/dashboard/TotalVehiclesCard";
-import WeeklyEfficiencyCard from "@/components/dashboard/WeeklyEfficiencyCard";
+import EmergencyAlertsCard from "@/components/dashboard/EmergencyAlertsCard";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -59,6 +61,30 @@ const Dashboard = () => {
     { day: "Sun", efficiency: 78 },
   ];
 
+  const vehicleStatusData = [
+    { name: "Running", value: 427, color: "#10B981" }, // Green
+    { name: "Idle", value: 248, color: "#0EA5E9" }, // Blue
+    { name: "Stop", value: 150, color: "#F59E0B" }, // Amber
+  ];
+
+  const stoppedVehiclesData = [
+    { name: "Maintenance", value: 45, color: "#F59E0B" }, // Amber
+    { name: "Breakdown", value: 32, color: "#EF4444" }, // Red
+    { name: "Scheduled", value: 73, color: "#0EA5E9" }, // Blue
+  ];
+
+  const vtsDeviceData = [
+    { name: "Active", value: 723, color: "#10B981" }, // Green
+    { name: "Inactive", value: 102, color: "#EF4444" }, // Red
+  ];
+
+  const emergencyAlerts = [
+    { type: "Overspeeding", count: 23, color: "#EF4444" },
+    { type: "Harsh Acceleration", count: 15, color: "#F59E0B" },
+    { type: "Harsh Braking", count: 18, color: "#0EA5E9" },
+    { type: "Route Deviation", count: 12, color: "#8B5CF6" },
+  ];
+
   if (isLoading) {
     return (
       <div className="h-screen w-full flex items-center justify-center">
@@ -85,41 +111,40 @@ const Dashboard = () => {
           
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             <StatCard 
+              title="Total Vehicles" 
+              value="1,225" 
+              icon={<Bus className="h-5 w-5" />} 
+              colorClass="stat-card-blue"
+            />
+            <StatCard 
               title="Total Depots" 
               value="49" 
               icon={<Bus className="h-5 w-5" />} 
-              colorClass="stat-card-blue"
+              colorClass="stat-card-green"
             />
             <StatCard 
               title="Total Kilometers" 
               value="331,518,824" 
               icon={<Navigation className="h-5 w-5" />} 
-              colorClass="stat-card-green"
-            />
-            <StatCard 
-              title="Fleet Safety Score" 
-              value="87/100" 
-              icon={<Shield className="h-5 w-5" />} 
-              colorClass="stat-card-purple"
-              subStats={[
-                { label: "Overspeeding", value: "23 incidents", color: "red" },
-                { label: "Harsh Acceleration", value: "15 incidents", color: "yellow" },
-                { label: "Harsh Braking", value: "18 incidents", color: "yellow" },
-              ]}
+              colorClass="stat-card-yellow"
             />
             <StatCard 
               title="Current Month KMs (GPS)" 
               value="1,258,467" 
               icon={<Gauge className="h-5 w-5" />} 
-              colorClass="stat-card-yellow"
+              colorClass="stat-card-purple"
             />
           </div>
           
-          <div className="grid lg:grid-cols-3 gap-6 mt-6">
+          <div className="mt-6">
+            <IndiaMap />
+          </div>
+
+          <div className="grid lg:grid-cols-4 gap-6 mt-6">
             <FleetStatusChart data={fleetStatusData} />
-            <div className="lg:col-span-2">
-              <IdleVehiclesChart data={idleVehiclesData} />
-            </div>
+            <VehicleStatusChart data={vehicleStatusData} />
+            <IdleVehiclesChart data={idleVehiclesData} />
+            <VtsDeviceStatusChart data={vtsDeviceData} />
           </div>
 
           <div className="mt-6">
@@ -152,7 +177,7 @@ const Dashboard = () => {
 
           <div className="mt-6 grid gap-6 md:grid-cols-2">
             <DailyDistanceChart />
-            <WeeklyEfficiencyCard data={weeklyPerformanceData} />
+            <EmergencyAlertsCard alerts={emergencyAlerts} />
           </div>
 
           <div className="mt-6 grid gap-6 md:grid-cols-3">
@@ -186,10 +211,6 @@ const Dashboard = () => {
                 "90 days": 29
               }}
             />
-          </div>
-
-          <div className="mt-6">
-            <IndiaMap />
           </div>
         </main>
       </div>
