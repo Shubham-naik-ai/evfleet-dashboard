@@ -129,12 +129,6 @@ const Dashboard = () => {
               icon={<Gauge className="h-5 w-5" />} 
               colorClass="stat-card-purple"
             />
-            <StatCard 
-              title="Idle Vehicles" 
-              value="183" 
-              icon={<Clock className="h-5 w-5" />} 
-              colorClass="stat-card-blue"
-            />
           </div>
           
           <div className="grid lg:grid-cols-5 gap-6 mt-6">
@@ -156,18 +150,18 @@ const Dashboard = () => {
                 icon="navigation"
               />
               <KilometerCard 
+                title="Avg Daily Distance" 
+                value="48,560 km" 
+                change="↑ 5.2% from yesterday" 
+                trend="up"
+                icon="route"
+              />
+              <KilometerCard 
                 title="Avg KMs Per Charge" 
                 value="287 km" 
                 change="↑ 2.3% improvement" 
                 trend="up"
                 icon="gauge"
-              />
-              <KilometerCard 
-                title="Active Vehicles Today" 
-                value="1,078 vehicles" 
-                change="↑ 3.4% from yesterday" 
-                trend="up"
-                icon="truck"
               />
             </div>
           </div>
