@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Bus, Calendar, Gauge, Shield, Clock, Navigation } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -113,12 +112,6 @@ const Dashboard = () => {
           
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             <StatCard 
-              title="Total Kilometers" 
-              value="331,518,824" 
-              icon={<Navigation className="h-5 w-5" />} 
-              colorClass="stat-card-blue"
-            />
-            <StatCard 
               title="Total Depots" 
               value="49" 
               icon={<Bus className="h-5 w-5" />} 
@@ -136,6 +129,12 @@ const Dashboard = () => {
               icon={<Gauge className="h-5 w-5" />} 
               colorClass="stat-card-purple"
             />
+            <StatCard 
+              title="Idle Vehicles" 
+              value="183" 
+              icon={<Clock className="h-5 w-5" />} 
+              colorClass="stat-card-blue"
+            />
           </div>
           
           <div className="grid lg:grid-cols-5 gap-6 mt-6">
@@ -148,14 +147,13 @@ const Dashboard = () => {
 
           <div className="mt-6">
             <h2 className="text-lg font-semibold mb-3">Key Performance Metrics</h2>
-            <div className="grid gap-4 md:grid-cols-4">
-              <TotalVehiclesCard counts={vehicleCounts} />
+            <div className="grid gap-4 md:grid-cols-3">
               <KilometerCard 
-                title="Avg Daily Distance" 
-                value="48,560 km" 
-                change="↑ 5.2% from yesterday" 
+                title="Total Kilometers" 
+                value="331,518,824 km" 
+                change="↑ 3.2% from last month" 
                 trend="up"
-                icon="route"
+                icon="navigation"
               />
               <KilometerCard 
                 title="Avg KMs Per Charge" 
@@ -210,6 +208,10 @@ const Dashboard = () => {
                 "90 days": 29
               }}
             />
+          </div>
+
+          <div className="mt-6">
+            <IndiaMap />
           </div>
         </main>
       </div>
