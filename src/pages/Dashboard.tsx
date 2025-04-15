@@ -111,9 +111,9 @@ const Dashboard = () => {
           
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             <StatCard 
-              title="Total Vehicles" 
-              value="1,225" 
-              icon={<Bus className="h-5 w-5" />} 
+              title="Total Kilometers" 
+              value="331,518,824" 
+              icon={<Navigation className="h-5 w-5" />} 
               colorClass="stat-card-blue"
             />
             <StatCard 
@@ -123,9 +123,9 @@ const Dashboard = () => {
               colorClass="stat-card-green"
             />
             <StatCard 
-              title="Total Kilometers" 
-              value="331,518,824" 
-              icon={<Navigation className="h-5 w-5" />} 
+              title="Total Vehicles" 
+              value="1,225" 
+              icon={<Bus className="h-5 w-5" />} 
               colorClass="stat-card-yellow"
             />
             <StatCard 
@@ -136,14 +136,11 @@ const Dashboard = () => {
             />
           </div>
           
-          <div className="mt-6">
-            <IndiaMap />
-          </div>
-
-          <div className="grid lg:grid-cols-4 gap-6 mt-6">
+          <div className="grid lg:grid-cols-5 gap-6 mt-6">
             <FleetStatusChart data={fleetStatusData} />
             <VehicleStatusChart data={vehicleStatusData} />
             <IdleVehiclesChart data={idleVehiclesData} />
+            <StoppedVehiclesChart data={stoppedVehiclesData} />
             <VtsDeviceStatusChart data={vtsDeviceData} />
           </div>
 

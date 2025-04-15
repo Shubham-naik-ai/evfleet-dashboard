@@ -1,9 +1,9 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
-import { CircleSlash } from "lucide-react";
+import { CircleStop } from "lucide-react";
 
-interface FleetStatusChartProps {
+interface StoppedVehiclesChartProps {
   data: {
     name: string;
     value: number;
@@ -11,16 +11,16 @@ interface FleetStatusChartProps {
   }[];
 }
 
-const FleetStatusChart = ({ data }: FleetStatusChartProps) => {
+const StoppedVehiclesChart = ({ data }: StoppedVehiclesChartProps) => {
   const total = data.reduce((acc, item) => acc + item.value, 0);
 
   return (
     <Card className="animate-fade-in">
       <CardHeader className="pb-2">
         <div className="flex justify-between items-center">
-          <CardTitle className="text-base font-medium">Fleet Status</CardTitle>
-          <div className="bg-blue-100 p-2 rounded-md">
-            <CircleSlash className="h-5 w-5 text-blue-600" />
+          <CardTitle className="text-base font-medium">Stopped Vehicles</CardTitle>
+          <div className="bg-amber-100 p-2 rounded-md">
+            <CircleStop className="h-5 w-5 text-amber-600" />
           </div>
         </div>
       </CardHeader>
@@ -53,7 +53,7 @@ const FleetStatusChart = ({ data }: FleetStatusChartProps) => {
           </ResponsiveContainer>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
             <span className="text-2xl font-bold">{total}</span>
-            <p className="text-xs text-muted-foreground">Total</p>
+            <p className="text-xs text-muted-foreground">Total Stopped</p>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-2 mt-2">
@@ -70,4 +70,4 @@ const FleetStatusChart = ({ data }: FleetStatusChartProps) => {
   );
 };
 
-export default FleetStatusChart;
+export default StoppedVehiclesChart;
