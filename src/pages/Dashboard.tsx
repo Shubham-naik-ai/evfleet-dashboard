@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Bus, Calendar, Gauge, Shield, Clock, Navigation } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -9,6 +10,7 @@ import FleetStatusChart from "@/components/dashboard/FleetStatusChart";
 import IdleVehiclesChart from "@/components/dashboard/IdleVehiclesChart";
 import VehicleStatusChart from "@/components/dashboard/VehicleStatusChart";
 import VtsDeviceStatusChart from "@/components/dashboard/VtsDeviceStatusChart";
+import StoppedVehiclesChart from "@/components/dashboard/StoppedVehiclesChart";
 import IndiaMap from "@/components/dashboard/IndiaMap";
 import { KilometerCard } from "@/components/analysis/KilometerCard";
 import { VehicleExpiryWidget } from "@/components/dashboard/VehicleExpiryWidget";
