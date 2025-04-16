@@ -132,22 +132,29 @@ const Dashboard = () => {
           </div>
           
           <div className="grid lg:grid-cols-5 gap-6 mt-6">
-            <FleetStatusChart data={fleetStatusData} />
-            <VehicleStatusChart data={vehicleStatusData} />
-            <IdleVehiclesChart data={idleVehiclesData} />
-            <StoppedVehiclesChart data={stoppedVehiclesData} />
-            <VtsDeviceStatusChart data={vtsDeviceData} />
+            <FleetStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={fleetStatusData} />
+            <VehicleStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={vehicleStatusData} />
+            <IdleVehiclesChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={idleVehiclesData} />
+            <StoppedVehiclesChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={stoppedVehiclesData} />
+            <VtsDeviceStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={vtsDeviceData} />
           </div>
 
           <div className="mt-6">
             <h2 className="text-lg font-semibold mb-3">Key Performance Metrics</h2>
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-4">
               <KilometerCard 
                 title="Total Kilometers" 
                 value="331,518,824 km" 
                 change="↑ 3.2% from last month" 
                 trend="up"
                 icon="navigation"
+              />
+              <KilometerCard 
+                title="Monthly Distance Covered" 
+                value="2,845,672 km" 
+                change="↑ 4.1% from last month" 
+                trend="up"
+                icon="calendar"
               />
               <KilometerCard 
                 title="Avg Daily Distance" 
