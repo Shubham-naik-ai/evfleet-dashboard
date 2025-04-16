@@ -13,6 +13,7 @@ import {
   Tooltip,
 } from "recharts";
 import { Clock } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface IdleVehiclesChartProps {
   data: {
@@ -20,13 +21,14 @@ interface IdleVehiclesChartProps {
     value: number;
     color: string;
   }[];
+  className?: string;
 }
 
-const IdleVehiclesChart = ({ data }: IdleVehiclesChartProps) => {
+const IdleVehiclesChart = ({ data, className }: IdleVehiclesChartProps) => {
   const total = data.reduce((acc, item) => acc + item.value, 0);
 
   return (
-    <Card className="animate-fade-in">
+    <Card className={cn("animate-fade-in", className)}>
       <CardHeader className="pb-2">
         <div className="flex justify-between items-center">
           <CardTitle className="text-base font-medium">Idle Vehicles</CardTitle>

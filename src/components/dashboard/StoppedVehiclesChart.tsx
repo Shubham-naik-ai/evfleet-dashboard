@@ -2,6 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { CircleStop } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface StoppedVehiclesChartProps {
   data: {
@@ -9,13 +10,14 @@ interface StoppedVehiclesChartProps {
     value: number;
     color: string;
   }[];
+  className?: string;
 }
 
-const StoppedVehiclesChart = ({ data }: StoppedVehiclesChartProps) => {
+const StoppedVehiclesChart = ({ data, className }: StoppedVehiclesChartProps) => {
   const total = data.reduce((acc, item) => acc + item.value, 0);
 
   return (
-    <Card className="animate-fade-in">
+    <Card className={cn("animate-fade-in", className)}>
       <CardHeader className="pb-2">
         <div className="flex justify-between items-center">
           <CardTitle className="text-base font-medium">Stopped Vehicles</CardTitle>

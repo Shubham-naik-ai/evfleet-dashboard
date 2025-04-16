@@ -2,6 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { Car } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface VehicleStatusChartProps {
   data: {
@@ -9,13 +10,14 @@ interface VehicleStatusChartProps {
     value: number;
     color: string;
   }[];
+  className?: string;
 }
 
-const VehicleStatusChart = ({ data }: VehicleStatusChartProps) => {
+const VehicleStatusChart = ({ data, className }: VehicleStatusChartProps) => {
   const total = data.reduce((acc, item) => acc + item.value, 0);
 
   return (
-    <Card className="animate-fade-in">
+    <Card className={cn("animate-fade-in", className)}>
       <CardHeader className="pb-2">
         <div className="flex justify-between items-center">
           <CardTitle className="text-base font-medium">Vehicle Status</CardTitle>
