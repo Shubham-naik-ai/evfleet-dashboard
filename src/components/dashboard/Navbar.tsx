@@ -28,7 +28,11 @@ const Navbar = ({ onToggleSidebar, isSidebarOpen }: NavbarProps) => {
             </SheetContent>
           </Sheet>
           <div className="lg:hidden">
-            <h1 className="text-lg font-semibold">EV Fleet</h1>
+            <img 
+              src="/eveytrans-logo.png" 
+              alt="EveyTrans Logo" 
+              className="h-8 w-auto" 
+            />
           </div>
         </div>
         

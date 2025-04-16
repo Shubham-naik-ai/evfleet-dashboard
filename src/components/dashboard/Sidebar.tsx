@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 import { 
   Bus, 
@@ -31,8 +30,11 @@ export function Sidebar({ className }: SidebarProps) {
     <aside className={cn("flex h-screen w-64 flex-col border-r border-border/40 bg-background", className)}>
       <div className="flex h-16 items-center border-b border-border/40 px-6">
         <div className="flex items-center gap-2">
-          <Bus className="h-6 w-6 text-ev-blue" />
-          <span className="text-xl font-semibold tracking-tight">EV Fleet</span>
+          <img 
+            src="/eveytrans-logo.png" 
+            alt="EveyTrans Logo" 
+            className="h-8 w-auto" 
+          />
         </div>
       </div>
       <div className="flex-1 overflow-auto py-4">
