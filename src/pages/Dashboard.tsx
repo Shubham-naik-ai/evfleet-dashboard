@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Bus, Calendar, Gauge, Navigation, LeafyGreen } from "lucide-react";
+import { Bus, Calendar, Gauge, Shield, Clock, Navigation } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/dashboard/Navbar";
 import { Sidebar } from "@/components/dashboard/Sidebar";
@@ -16,7 +16,6 @@ import { VehicleExpiryWidget } from "@/components/dashboard/VehicleExpiryWidget"
 import { DailyDistanceChart } from "@/components/dashboard/DailyDistanceChart";
 import TotalVehiclesCard from "@/components/dashboard/TotalVehiclesCard";
 import EmergencyAlertsCard from "@/components/dashboard/EmergencyAlertsCard";
-import CO2EmissionCard from "@/components/analysis/CO2EmissionCard";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -125,16 +124,6 @@ const Dashboard = () => {
               colorClass="stat-card-yellow"
             />
             <StatCard 
-              title="Total Kilometers" 
-              value="331,518,824" 
-              icon={<Navigation className="h-5 w-5" />} 
-              colorClass="stat-card-blue"
-              trend={{
-                value: "3.2% from last month",
-                direction: "up"
-              }}
-            />
-            <StatCard 
               title="Current Month KMs (GPS)" 
               value="1,258,467" 
               icon={<Gauge className="h-5 w-5" />} 
@@ -142,10 +131,7 @@ const Dashboard = () => {
             />
           </div>
           
-          <div className="grid lg:grid-cols-6 gap-6 mt-6">
-            <div className="lg:col-span-1">
-              <CO2EmissionCard />
-            </div>
+          <div className="grid lg:grid-cols-5 gap-6 mt-6">
             <FleetStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={fleetStatusData} />
             <VehicleStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={vehicleStatusData} />
             <IdleVehiclesChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={idleVehiclesData} />
@@ -171,11 +157,11 @@ const Dashboard = () => {
                 icon="calendar"
               />
               <KilometerCard 
-                title="Avg Monthly Distance" 
-                value="2,765,990 km" 
-                change="↑ 3.8% from last month" 
+                title="Avg Daily Distance" 
+                value="48,560 km" 
+                change="↑ 5.2% from yesterday" 
                 trend="up"
-                icon="trending"
+                icon="route"
               />
               <KilometerCard 
                 title="Avg KMs Per Charge" 
