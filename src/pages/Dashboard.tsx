@@ -16,7 +16,7 @@ import { VehicleExpiryWidget } from "@/components/dashboard/VehicleExpiryWidget"
 import { DailyDistanceChart } from "@/components/dashboard/DailyDistanceChart";
 import TotalVehiclesCard from "@/components/dashboard/TotalVehiclesCard";
 import EmergencyAlertsCard from "@/components/dashboard/EmergencyAlertsCard";
-import CO2EmissionCard from "@/components/analysis/CO2EmissionCard";
+import CO2EmissionCard from "@/components/dashboard/CO2EmissionCard";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
