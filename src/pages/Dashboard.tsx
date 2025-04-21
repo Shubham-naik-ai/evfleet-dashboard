@@ -111,8 +111,8 @@ const Dashboard = () => {
             title="Fleet Management Dashboard" 
             subtitle="Overview of your EV fleet performance and statistics"
           />
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
             <StatCard 
               title="Total Depots" 
               value="49" 
@@ -126,6 +126,16 @@ const Dashboard = () => {
               colorClass="stat-card-yellow"
             />
             <StatCard 
+              title="Total Kilometers" 
+              value="331,518,824" 
+              icon={<Navigation className="h-5 w-5" />}
+              colorClass="stat-card-blue"
+              trend={{
+                value: "3.2% from last month",
+                direction: "up"
+              }}
+            />
+            <StatCard 
               title="Current Month KMs (GPS)" 
               value="1,258,467" 
               icon={<Gauge className="h-5 w-5" />} 
@@ -134,18 +144,6 @@ const Dashboard = () => {
             <CO2EmissionCard
               value={72893}
               change={4.6}
-            />
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mt-6">
-            <DriverLicenseExpiryWidget
-              expiryData={{
-                "7 days": 1,
-                "30 days": 6,
-                "60 days": 11,
-                "90 days": 17
-              }}
-              className="h-full"
             />
           </div>
           
@@ -225,6 +223,14 @@ const Dashboard = () => {
                 "30 days": 10,
                 "60 days": 18,
                 "90 days": 29
+              }}
+            />
+            <DriverLicenseExpiryWidget
+              expiryData={{
+                "7 days": 1,
+                "30 days": 6,
+                "60 days": 11,
+                "90 days": 17
               }}
             />
           </div>
