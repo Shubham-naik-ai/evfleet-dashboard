@@ -16,6 +16,7 @@ import { VehicleExpiryWidget } from "@/components/dashboard/VehicleExpiryWidget"
 import { DailyDistanceChart } from "@/components/dashboard/DailyDistanceChart";
 import TotalVehiclesCard from "@/components/dashboard/TotalVehiclesCard";
 import EmergencyAlertsCard from "@/components/dashboard/EmergencyAlertsCard";
+import DriverLicenseExpiryWidget from "@/components/dashboard/DriverLicenseExpiryWidget";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -207,6 +208,14 @@ const Dashboard = () => {
                 "30 days": 10,
                 "60 days": 18,
                 "90 days": 29
+              }}
+            />
+            <DriverLicenseExpiryWidget
+              expiryData={{
+                "7 days": 1,
+                "30 days": 6,
+                "60 days": 11,
+                "90 days": 17
               }}
             />
           </div>
