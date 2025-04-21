@@ -1,5 +1,6 @@
+
 import { useState, useEffect } from "react";
-import { Bus, Calendar, Gauge, Shield, Clock, Navigation } from "lucide-react";
+import { Bus, Gauge, Navigation } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/dashboard/Navbar";
 import { Sidebar } from "@/components/dashboard/Sidebar";
@@ -112,7 +113,7 @@ const Dashboard = () => {
             subtitle="Overview of your EV fleet performance and statistics"
           />
           
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
+          <div className="grid gap-6 md:grid-cols-4 lg:grid-cols-4">
             <StatCard 
               title="Total Depots" 
               value="49" 
@@ -126,16 +127,6 @@ const Dashboard = () => {
               colorClass="stat-card-yellow"
             />
             <StatCard 
-              title="Total Kilometers" 
-              value="331,518,824" 
-              icon={<Navigation className="h-5 w-5" />}
-              colorClass="stat-card-blue"
-              trend={{
-                value: "3.2% from last month",
-                direction: "up"
-              }}
-            />
-            <StatCard 
               title="Current Month KMs (GPS)" 
               value="1,258,467" 
               icon={<Gauge className="h-5 w-5" />} 
@@ -147,7 +138,48 @@ const Dashboard = () => {
             />
           </div>
           
-          <div className="grid lg:grid-cols-5 gap-6 mt-6">
+          <div className="mt-6 grid gap-6 md:grid-cols-4">
+            <VehicleExpiryWidget 
+              title="Insurance Expiry" 
+              icon="calendar"
+              expiryData={{
+                "7 days": 4,
+                "30 days": 12,
+                "60 days": 25,
+                "90 days": 32
+              }}
+            />
+            <VehicleExpiryWidget 
+              title="Fitness Certificate Expiry" 
+              icon="file"
+              expiryData={{
+                "7 days": 2,
+                "30 days": 8,
+                "60 days": 14,
+                "90 days": 23
+              }}
+            />
+            <VehicleExpiryWidget 
+              title="VTS Validity Expiry" 
+              icon="clock"
+              expiryData={{
+                "7 days": 3,
+                "30 days": 10,
+                "60 days": 18,
+                "90 days": 29
+              }}
+            />
+            <DriverLicenseExpiryWidget
+              expiryData={{
+                "7 days": 1,
+                "30 days": 6,
+                "60 days": 11,
+                "90 days": 17
+              }}
+            />
+          </div>
+
+          <div className="mt-6 grid gap-6 md:grid-cols-5">
             <FleetStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={fleetStatusData} />
             <VehicleStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={vehicleStatusData} />
             <IdleVehiclesChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={idleVehiclesData} />
@@ -192,47 +224,6 @@ const Dashboard = () => {
           <div className="mt-6 grid gap-6 md:grid-cols-2">
             <DailyDistanceChart />
             <EmergencyAlertsCard alerts={emergencyAlerts} />
-          </div>
-
-          <div className="mt-6 grid gap-6 md:grid-cols-3">
-            <VehicleExpiryWidget 
-              title="Insurance Expiry" 
-              icon="calendar"
-              expiryData={{
-                "7 days": 4,
-                "30 days": 12,
-                "60 days": 25,
-                "90 days": 32
-              }}
-            />
-            <VehicleExpiryWidget 
-              title="Fitness Certificate Expiry" 
-              icon="file"
-              expiryData={{
-                "7 days": 2,
-                "30 days": 8,
-                "60 days": 14,
-                "90 days": 23
-              }}
-            />
-            <VehicleExpiryWidget 
-              title="VTS Validity Expiry" 
-              icon="clock"
-              expiryData={{
-                "7 days": 3,
-                "30 days": 10,
-                "60 days": 18,
-                "90 days": 29
-              }}
-            />
-            <DriverLicenseExpiryWidget
-              expiryData={{
-                "7 days": 1,
-                "30 days": 6,
-                "60 days": 11,
-                "90 days": 17
-              }}
-            />
           </div>
 
           <div className="mt-6">
