@@ -17,6 +17,7 @@ import { DailyDistanceChart } from "@/components/dashboard/DailyDistanceChart";
 import TotalVehiclesCard from "@/components/dashboard/TotalVehiclesCard";
 import EmergencyAlertsCard from "@/components/dashboard/EmergencyAlertsCard";
 import DriverLicenseExpiryWidget from "@/components/dashboard/DriverLicenseExpiryWidget";
+import CO2EmissionCard from "@/components/analysis/CO2EmissionCard";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -111,7 +112,7 @@ const Dashboard = () => {
             subtitle="Overview of your EV fleet performance and statistics"
           />
           
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
             <StatCard 
               title="Total Depots" 
               value="49" 
@@ -125,10 +126,24 @@ const Dashboard = () => {
               colorClass="stat-card-yellow"
             />
             <StatCard 
+              title="Total Kilometers" 
+              value="331,518,824" 
+              icon={<Navigation className="h-5 w-5" />}
+              colorClass="stat-card-blue"
+              trend={{
+                value: "3.2% from last month",
+                direction: "up"
+              }}
+            />
+            <StatCard 
               title="Current Month KMs (GPS)" 
               value="1,258,467" 
               icon={<Gauge className="h-5 w-5" />} 
               colorClass="stat-card-purple"
+            />
+            <CO2EmissionCard
+              value={72893}
+              change={4.6}
             />
           </div>
           
