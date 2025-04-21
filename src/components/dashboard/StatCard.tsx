@@ -8,6 +8,10 @@ interface StatProps {
   value: string | number;
   icon: React.ReactNode;
   colorClass?: string;
+  trend?: {
+    value: string;
+    direction: "up" | "down" | "neutral";
+  };
   subStats?: Array<{
     label: string;
     value: string | number;
@@ -21,6 +25,7 @@ const StatCard = ({
   value,
   icon,
   colorClass = "stat-card-blue",
+  trend,
   subStats,
   className,
 }: StatProps) => {
@@ -30,6 +35,15 @@ const StatCard = ({
         <div>
           <h3 className="text-sm font-medium text-muted-foreground mb-1">{title}</h3>
           <p className="text-2xl font-semibold tracking-tight">{value}</p>
+          {trend && (
+            <p className={cn("text-xs mt-1", 
+              trend.direction === "up" ? "text-green-500" : 
+              trend.direction === "down" ? "text-red-500" : 
+              "text-muted-foreground"
+            )}>
+              {trend.direction === "up" ? "↑" : trend.direction === "down" ? "↓" : ""} {trend.value}
+            </p>
+          )}
         </div>
         <div className={cn("p-2 rounded-md", 
           colorClass === "stat-card-blue" ? "bg-ev-lightBlue text-ev-blue" : 
