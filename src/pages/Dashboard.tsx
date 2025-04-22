@@ -38,12 +38,11 @@ const Dashboard = () => {
   const fleetStatusData = [
     { name: "In Depot", value: 427, color: "#0EA5E9" }, // Blue
     { name: "On Route", value: 648, color: "#10B981" }, // Green
-    { name: "Maintenance", value: 150, color: "#F59E0B" }, // Amber
   ];
 
   const idleVehiclesData = [
-    { name: "0 Hrs", value: 128, color: "#10B981" }, // Green
-    { name: "0-2 Hrs", value: 246, color: "#0EA5E9" }, // Blue
+    { name: "0-1 Hrs", value: 128, color: "#10B981" }, // Green
+    { name: "1-2 Hrs", value: 146, color: "#0EA5E9" }, // Blue
     { name: "2-5 Hrs", value: 183, color: "#F59E0B" }, // Amber
     { name: "> 5 Hrs", value: 97, color: "#EF4444" }, // Red
   ];
@@ -71,9 +70,10 @@ const Dashboard = () => {
   ];
 
   const stoppedVehiclesData = [
-    { name: "Maintenance", value: 45, color: "#F59E0B" }, // Amber
-    { name: "Breakdown", value: 32, color: "#EF4444" }, // Red
-    { name: "Scheduled", value: 73, color: "#0EA5E9" }, // Blue
+    { name: "0-1 Hrs", value: 45, color: "#10B981" }, // Green
+    { name: "1-2 Hrs", value: 32, color: "#0EA5E9" }, // Blue
+    { name: "2-5 Hrs", value: 43, color: "#F59E0B" }, // Amber
+    { name: "> 5 Hrs", value: 30, color: "#EF4444" }, // Red
   ];
 
   const vtsDeviceData = [
@@ -85,7 +85,7 @@ const Dashboard = () => {
     { type: "Overspeeding", count: 23, color: "#EF4444" },
     { type: "Harsh Acceleration", count: 15, color: "#F59E0B" },
     { type: "Harsh Braking", count: 18, color: "#0EA5E9" },
-    { type: "Route Deviation", count: 12, color: "#8B5CF6" },
+    { type: "SOS Alerts", count: 12, color: "#8B5CF6" },
   ];
 
   if (isLoading) {
@@ -126,8 +126,8 @@ const Dashboard = () => {
               colorClass="stat-card-yellow"
             />
             <StatCard 
-              title="Current Month KMs (GPS)" 
-              value="1,258,467" 
+              title="Total Kilometers" 
+              value="331,518,824" 
               icon={<Gauge className="h-5 w-5" />} 
               colorClass="stat-card-purple"
             />
