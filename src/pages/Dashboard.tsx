@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Bus, Gauge, Navigation } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -137,7 +136,47 @@ const Dashboard = () => {
               change={4.6}
             />
           </div>
-          
+
+          <div className="mt-6 grid gap-6 md:grid-cols-5">
+            <FleetStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={fleetStatusData} />
+            <VehicleStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={vehicleStatusData} />
+            <IdleVehiclesChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={idleVehiclesData} />
+            <StoppedVehiclesChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={stoppedVehiclesData} />
+            <VtsDeviceStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={vtsDeviceData} />
+          </div>
+
+          <div className="mt-6">
+            <h2 className="text-lg font-semibold mb-3">Key Performance Metrics</h2>
+            <div className="grid gap-4 md:grid-cols-4">
+              <KilometerCard 
+                title="Monthly Distance Covered" 
+                value="2,845,672 km" 
+                change="↑ 4.1% from last month" 
+                trend="up"
+                icon="calendar"
+              />
+              <KilometerCard 
+                title="Avg Daily Distance" 
+                value="48,560 km" 
+                change="↑ 5.2% from yesterday" 
+                trend="up"
+                icon="route"
+              />
+              <KilometerCard 
+                title="Avg KMs Per Charge" 
+                value="287 km" 
+                change="↑ 2.3% improvement" 
+                trend="up"
+                icon="gauge"
+              />
+            </div>
+          </div>
+
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            <DailyDistanceChart />
+            <EmergencyAlertsCard alerts={emergencyAlerts} />
+          </div>
+
           <div className="mt-6 grid gap-6 md:grid-cols-4">
             <VehicleExpiryWidget 
               title="Insurance Expiry" 
@@ -177,53 +216,6 @@ const Dashboard = () => {
                 "90 days": 17
               }}
             />
-          </div>
-
-          <div className="mt-6 grid gap-6 md:grid-cols-5">
-            <FleetStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={fleetStatusData} />
-            <VehicleStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={vehicleStatusData} />
-            <IdleVehiclesChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={idleVehiclesData} />
-            <StoppedVehiclesChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={stoppedVehiclesData} />
-            <VtsDeviceStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={vtsDeviceData} />
-          </div>
-
-          <div className="mt-6">
-            <h2 className="text-lg font-semibold mb-3">Key Performance Metrics</h2>
-            <div className="grid gap-4 md:grid-cols-4">
-              <KilometerCard 
-                title="Total Kilometers" 
-                value="331,518,824 km" 
-                change="↑ 3.2% from last month" 
-                trend="up"
-                icon="navigation"
-              />
-              <KilometerCard 
-                title="Monthly Distance Covered" 
-                value="2,845,672 km" 
-                change="↑ 4.1% from last month" 
-                trend="up"
-                icon="calendar"
-              />
-              <KilometerCard 
-                title="Avg Daily Distance" 
-                value="48,560 km" 
-                change="↑ 5.2% from yesterday" 
-                trend="up"
-                icon="route"
-              />
-              <KilometerCard 
-                title="Avg KMs Per Charge" 
-                value="287 km" 
-                change="↑ 2.3% improvement" 
-                trend="up"
-                icon="gauge"
-              />
-            </div>
-          </div>
-
-          <div className="mt-6 grid gap-6 md:grid-cols-2">
-            <DailyDistanceChart />
-            <EmergencyAlertsCard alerts={emergencyAlerts} />
           </div>
 
           <div className="mt-6">
