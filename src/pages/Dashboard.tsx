@@ -36,8 +36,8 @@ const Dashboard = () => {
   };
 
   const fleetStatusData = [
-    { name: "In Depot", value: 427, color: "#0EA5E9" }, // Blue
-    { name: "On Route", value: 648, color: "#10B981" }, // Green
+    { name: "In Depot", value: 1147, color: "#0EA5E9" }, // Blue
+    { name: "On Route", value: 1148, color: "#10B981" }, // Green
   ];
 
   const idleVehiclesData = [
@@ -48,9 +48,9 @@ const Dashboard = () => {
   ];
 
   const vehicleCounts = {
-    running: 856,
-    active: 222,
-    stopped: 147,
+    running: 1606,
+    active: 422,
+    stopped: 267,
   };
 
   const weeklyPerformanceData = [
@@ -64,9 +64,9 @@ const Dashboard = () => {
   ];
 
   const vehicleStatusData = [
-    { name: "Running", value: 427, color: "#10B981" }, // Green
-    { name: "Idle", value: 248, color: "#0EA5E9" }, // Blue
-    { name: "Stop", value: 150, color: "#F59E0B" }, // Amber
+    { name: "Running", value: 1606, color: "#10B981" }, // Green
+    { name: "Idle", value: 454, color: "#0EA5E9" }, // Blue
+    { name: "Stop", value: 235, color: "#F59E0B" }, // Amber
   ];
 
   const stoppedVehiclesData = [
@@ -77,8 +77,8 @@ const Dashboard = () => {
   ];
 
   const vtsDeviceData = [
-    { name: "Active", value: 723, color: "#10B981" }, // Green
-    { name: "Inactive", value: 102, color: "#EF4444" }, // Red
+    { name: "Active", value: 1994, color: "#10B981" }, // Green
+    { name: "Inactive", value: 301, color: "#EF4444" }, // Red
   ];
 
   const emergencyAlerts = [
@@ -121,7 +121,7 @@ const Dashboard = () => {
             />
             <StatCard 
               title="Total Vehicles" 
-              value="1,225" 
+              value="2,295" 
               icon={<Bus className="h-5 w-5" />} 
               colorClass="stat-card-yellow"
             />
