@@ -149,6 +149,13 @@ const Dashboard = () => {
             <h2 className="text-lg font-semibold mb-3">Key Performance Metrics</h2>
             <div className="grid gap-4 md:grid-cols-4">
               <KilometerCard 
+                title="Total Kilometers" 
+                value="331,518,824 km" 
+                change="↑ 3.2% from last month" 
+                trend="up"
+                icon="navigation"
+              />
+              <KilometerCard 
                 title="Monthly Distance Covered" 
                 value="2,845,672 km" 
                 change="↑ 4.1% from last month" 
