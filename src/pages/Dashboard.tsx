@@ -18,10 +18,17 @@ import TotalVehiclesCard from "@/components/dashboard/TotalVehiclesCard";
 import EmergencyAlertsCard from "@/components/dashboard/EmergencyAlertsCard";
 import DriverLicenseExpiryWidget from "@/components/dashboard/DriverLicenseExpiryWidget";
 import CO2EmissionCard from "@/components/analysis/CO2EmissionCard";
+import { DashboardFilters } from "@/components/dashboard/DashboardFilters";
+import { getProjectData } from "@/utils/dashboardData";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedProject, setSelectedProject] = useState("PMPML");
+  const [selectedDepot, setSelectedDepot] = useState("BANER");
+
+  // Get dynamic data based on selected project and depot
+  const dashboardData = getProjectData(selectedProject, selectedDepot);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -112,6 +119,13 @@ const Dashboard = () => {
             subtitle="Overview of your EV fleet performance and statistics"
           />
           
+          <DashboardFilters
+            selectedProject={selectedProject}
+            selectedDepot={selectedDepot}
+            onProjectChange={setSelectedProject}
+            onDepotChange={setSelectedDepot}
+          />
+          
           <div className="grid gap-6 md:grid-cols-4 lg:grid-cols-4">
             <StatCard 
               title="Total Depots" 
@@ -121,28 +135,28 @@ const Dashboard = () => {
             />
             <StatCard 
               title="Total Vehicles" 
-              value="2,295" 
+              value={dashboardData.totalVehicles.toLocaleString()} 
               icon={<Bus className="h-5 w-5" />} 
               colorClass="stat-card-yellow"
             />
             <StatCard 
               title="Total Kilometers" 
-              value="331,518,824" 
+              value={dashboardData.totalKilometers} 
               icon={<Gauge className="h-5 w-5" />} 
               colorClass="stat-card-purple"
             />
             <CO2EmissionCard
-              value={72893}
+              value={dashboardData.co2Emission}
               change={4.6}
             />
           </div>
 
           <div className="mt-6 grid gap-6 md:grid-cols-5">
-            <FleetStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={fleetStatusData} />
-            <VehicleStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={vehicleStatusData} />
-            <IdleVehiclesChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={idleVehiclesData} />
-            <StoppedVehiclesChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={stoppedVehiclesData} />
-            <VtsDeviceStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={vtsDeviceData} />
+            <FleetStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={dashboardData.fleetStatusData} />
+            <VehicleStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={dashboardData.vehicleStatusData} />
+            <IdleVehiclesChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={dashboardData.idleVehiclesData} />
+            <StoppedVehiclesChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={dashboardData.stoppedVehiclesData} />
+            <VtsDeviceStatusChart className="[&_.recharts-legend-item-text]:text-xs [&_span.text-xs]:!text-[10px]" data={dashboardData.vtsDeviceData} />
           </div>
 
           <div className="mt-6">
@@ -150,28 +164,28 @@ const Dashboard = () => {
             <div className="grid gap-4 md:grid-cols-4">
               <KilometerCard 
                 title="Total Kilometers" 
-                value="331,518,824 km" 
+                value={`${dashboardData.totalKilometers} km`} 
                 change="↑ 3.2% from last month" 
                 trend="up"
                 icon="navigation"
               />
               <KilometerCard 
                 title="Monthly Distance Covered" 
-                value="2,845,672 km" 
+                value={`${dashboardData.monthlyDistance} km`} 
                 change="↑ 4.1% from last month" 
                 trend="up"
                 icon="calendar"
               />
               <KilometerCard 
                 title="Avg Daily Distance" 
-                value="48,560 km" 
+                value={`${dashboardData.avgDailyDistance} km`} 
                 change="↑ 5.2% from yesterday" 
                 trend="up"
                 icon="route"
               />
               <KilometerCard 
                 title="Avg KMs Per Charge" 
-                value="287 km" 
+                value={`${dashboardData.avgKmsPerCharge} km`} 
                 change="↑ 2.3% improvement" 
                 trend="up"
                 icon="gauge"
@@ -181,7 +195,7 @@ const Dashboard = () => {
 
           <div className="mt-6 grid gap-6 md:grid-cols-2">
             <DailyDistanceChart />
-            <EmergencyAlertsCard alerts={emergencyAlerts} />
+            <EmergencyAlertsCard alerts={dashboardData.emergencyAlerts} />
           </div>
 
           <div className="mt-6 grid gap-6 md:grid-cols-4">
